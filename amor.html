@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Para Maria ❤️</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            color: white;
+            animation: fundo 20s infinite alternate;
+        }
+
+        @keyframes fundo {
+            0% { background: #ff9a9e; }
+            50% { background: #fad0c4; }
+            100% { background: #ffdde1; }
+        }
+
+        #login {
+            position: absolute;
+            top: 40%;
+            width: 100%;
+        }
+
+        input {
+            padding: 12px;
+            font-size: 18px;
+            border-radius: 15px;
+            border: none;
+            text-align: center;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 25px;
+            background-color: #ff4d6d;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #c9184a;
+            transform: scale(1.1);
+        }
+
+        #conteudo {
+            display: none;
+            margin-top: 100px;
+        }
+
+        h1 {
+            font-size: 50px;
+        }
+
+        .nome {
+            font-size: 60px;
+            font-weight: bold;
+        }
+
+        #contador {
+            font-size: 22px;
+            margin-top: 20px;
+        }
+
+        #mensagemDigitando {
+            font-size: 22px;
+            margin-top: 30px;
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 80px;
+        }
+
+        .heart {
+            position: fixed;
+            top: -10px;
+            font-size: 24px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+
+        h3 {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Música -->
+    <audio id="musicaFundo" src="musica.mp3" loop></audio>
+
+    <div id="login">
+        <h2>Digite nossa data 💖</h2>
+        <input type="text" id="senha" maxlength="8" placeholder="Ex: 08102024">
+        <br>
+        <button onclick="verificarSenha()">Entrar</button>
+        <p id="erro" style="color:red;"></p>
+    </div>
+
+    <div id="conteudo">
+        <h1>Eu te amo</h1>
+        <div class="nome">Maria ❤️</div>
+
+        <div id="contador"></div>
+
+        <div id="mensagemDigitando"></div>
+
+        <h3>
+            ASS: amor da sua vida (Lucas) 💖
+        </h3>
+    </div>
+
+    <script>
+        function verificarSenha() {
+            const senha = document.getElementById("senha").value;
+            if (senha === "08102024") {
+                document.getElementById("login").style.display = "none";
+                document.getElementById("conteudo").style.display = "block";
+                
+                document.getElementById("musicaFundo").play();
+
+                iniciarDigitacao();
+            } else {
+                document.getElementById("erro").innerText = "Data incorreta 😢";
+            }
+        }
+
+        const dataInicio = new Date("2024-10-08T00:00:00");
+
+        function atualizarContador() {
+            const agora = new Date();
+            const diferenca = agora - dataInicio;
+
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
+            const minutos = Math.floor((diferenca / (1000 * 60)) % 60);
+            const segundos = Math.floor((diferenca / 1000) % 60);
+
+            document.getElementById("contador").innerHTML =
+                "Estamos juntos há 💖<br>" +
+                dias + " dias " +
+                horas + " horas " +
+                minutos + " minutos " +
+                segundos + " segundos ❤️";
+        }
+
+        setInterval(atualizarContador, 1000);
+
+        const texto = "Maria, meu amor... 💖 " +
+              "Desde o dia 08 de outubro de 2024 minha vida ganhou mais cor, mais luz e mais sentido. " +
+              "Você é o sorriso que ilumina meus dias, o abraço que acalma meu coração e o sonho que eu nunca quero acordar. " +
+              "Cada segundo ao seu lado é como um pedacinho do céu que Deus me permitiu viver. " +
+              "Eu amo o seu jeito, amo sua voz, amo seu sorriso, amo até o jeito que você briga comigo. " +
+              "Eu amo você por inteira. " +
+              "E prometo cuidar do seu coração como se fosse o meu maior tesouro. 💍✨ " +
+              "Obrigado por existir e por escolher viver essa história comigo. " +
+              "Eu te amo infinitamente, hoje e sempre. 💕";
+
+        let i = 0;
+
+        function iniciarDigitacao() {
+            function digitar() {
+                if (i < texto.length) {
+                    document.getElementById("mensagemDigitando").innerHTML += texto.charAt(i);
+                    i++;
+                    setTimeout(digitar, 50);
+                }
+            }
+            digitar();
+        }
+
+        function criarCoracao() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(criarCoracao, 300);
+    </script>
+
+</body>
+</html>
